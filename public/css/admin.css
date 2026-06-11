@@ -1,0 +1,113 @@
+/* Admin Panel — Dark Sidebar Theme */
+.admin-sidebar {
+    background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+    border-right: none;
+}
+
+.admin-sidebar .crms-sidebar-brand {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.admin-sidebar .brand-text {
+    color: #fff;
+}
+
+.admin-sidebar .nav-section-title {
+    color: rgba(148, 163, 184, 0.7);
+}
+
+.admin-sidebar .crms-nav-item {
+    color: #94A3B8;
+}
+
+.admin-sidebar .crms-nav-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #F1F5F9;
+}
+
+.admin-sidebar .crms-nav-item.active {
+    background: rgba(37, 99, 235, 0.2);
+    color: #60A5FA;
+}
+
+.admin-sidebar .crms-nav-item.active::before {
+    background: #3B82F6;
+}
+
+.admin-sidebar .crms-sidebar-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.admin-sidebar .sidebar-user-info .small {
+    color: #E2E8F0;
+}
+
+.admin-header-gradient {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #0F172A 100%);
+    border-radius: var(--crms-radius-lg);
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.admin-header-gradient h1 {
+    color: #fff;
+    font-size: 1.75rem;
+    margin: 0;
+}
+
+.admin-header-gradient p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 4px 0 0;
+}
+
+.admin-submenu {
+    padding-left: 12px;
+    margin-bottom: 8px;
+}
+
+.admin-submenu .crms-nav-item {
+    padding: 8px 14px 8px 36px;
+    font-size: 0.8125rem;
+}
+
+.admin-submenu .crms-nav-item::before {
+    display: none;
+}
+
+.admin-kpi-grid .kpi-card {
+    border-left: 3px solid transparent;
+}
+
+.admin-kpi-grid .kpi-card:nth-child(1) { border-left-color: #2563EB; }
+.admin-kpi-grid .kpi-card:nth-child(2) { border-left-color: #8B5CF6; }
+.admin-kpi-grid .kpi-card:nth-child(3) { border-left-color: #10B981; }
+.admin-kpi-grid .kpi-card:nth-child(4) { border-left-color: #F59E0B; }
+.admin-kpi-grid .kpi-card:nth-child(5) { border-left-color: #EF4444; }
+.admin-kpi-grid .kpi-card:nth-child(6) { border-left-color: #06B6D4; }
+.admin-kpi-grid .kpi-card:nth-child(7) { border-left-color: #EC4899; }
+.admin-kpi-grid .kpi-card:nth-child(8) { border-left-color: #6366F1; }
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.active { background: #10B981; }
+.status-dot.inactive { background: #94A3B8; }
+
+.client-logo-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--crms-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--crms-primary);
+}

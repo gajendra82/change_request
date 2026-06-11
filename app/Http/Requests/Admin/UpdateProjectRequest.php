@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class UpdateProjectRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return $this->user()?->isAdmin() ?? false;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'code' => ['required', 'string', 'max:50', Rule::unique('projects')->ignore($this->route('project'))],
+            'client_id' => 'required|exists:clients,id',
+            'description' => 'nullable|string|max:2000',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'project_manager_id' => 'nullable|exists:users,id',
+            'status' => 'required|in:active,on_hold,completed,cancelled',
+        ];
+    }
+}
