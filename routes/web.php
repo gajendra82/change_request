@@ -7,6 +7,10 @@ use App\Http\Controllers\ManagerTimelineController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/up', function () {
+    return response()->noContent();
+});
+
 Route::get('/', function () {
     return redirect()->route('login');
 });

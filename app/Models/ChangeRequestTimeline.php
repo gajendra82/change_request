@@ -23,14 +23,11 @@ class ChangeRequestTimeline extends Model
         'approved_by',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'start_date' => 'date',
-            'end_date' => 'date',
-            'cost' => 'decimal:2',
-        ];
-    }
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'cost' => 'decimal:2',
+    ];
 
     public static function calculateCost(int $estimatedDays): float
     {
