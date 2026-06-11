@@ -37,7 +37,15 @@
         $(document).ready(function () {
             $('.datatable').each(function () {
                 if (!$.fn.DataTable.isDataTable(this)) {
-                    $(this).DataTable({ responsive: true, order: [[0, 'desc']], pageLength: 15 });
+                    var hasLaravelPagination = $(this).closest('.crms-card').find('.pagination').length > 0;
+                    $(this).DataTable({
+                        responsive: true,
+                        order: [[0, 'desc']],
+                        paging: !hasLaravelPagination,
+                        pageLength: 15,
+                        searching: !hasLaravelPagination,
+                        info: !hasLaravelPagination,
+                    });
                 }
             });
         });

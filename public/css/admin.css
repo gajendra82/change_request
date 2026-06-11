@@ -98,6 +98,30 @@
 .status-dot.active { background: #10B981; }
 .status-dot.inactive { background: #94A3B8; }
 
+/* Laravel pagination — Bootstrap 5 alignment */
+.pagination {
+    margin-bottom: 0;
+    gap: 4px;
+}
+
+.pagination .page-link {
+    border-radius: 8px;
+    font-size: 0.875rem;
+    padding: 6px 12px;
+    color: var(--crms-text);
+    border-color: var(--crms-border);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--crms-primary);
+    border-color: var(--crms-primary);
+}
+
+.pagination .page-link:hover {
+    background: var(--crms-primary-light);
+    color: var(--crms-primary);
+}
+
 .client-logo-thumb {
     width: 40px;
     height: 40px;
