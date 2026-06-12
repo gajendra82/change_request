@@ -11,6 +11,7 @@
                     <div class="detail-item" style="grid-column:1/-1"><label>Description</label><p>{{ $changeRequest->description }}</p></div>
                 </div>
             </div></div>
+            @include('partials.change-request-attachments')
         </div>
         @if($changeRequest->timeline)
             <div class="col-lg-4">

@@ -16,13 +16,6 @@
             <div class="crms-alert crms-alert-success">{{ session('status') }}</div>
         @endif
 
-        <div class="auth-demo-box">
-            <strong>Demo Accounts</strong><br>
-            Admin: admin@company.com<br>
-            Client: client@crms.test &middot; Developer: developer@crms.test<br>
-            Manager: manager@crms.test &middot; Password: <code>password</code>
-        </div>
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
 

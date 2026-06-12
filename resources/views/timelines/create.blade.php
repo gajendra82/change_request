@@ -33,6 +33,7 @@
                     </div>
                 </div>
             </div>
+            @include('partials.change-request-attachments')
         </div>
 
         <div class="col-lg-7">

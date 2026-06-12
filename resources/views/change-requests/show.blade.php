@@ -55,6 +55,8 @@
                 </div>
             </div>
 
+            @include('partials.change-request-attachments')
+
             @if($changeRequest->timeline)
                 <div class="crms-card mb-4">
                     <div class="crms-card-header"><h5>Timeline Information</h5></div>

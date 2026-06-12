@@ -36,7 +36,7 @@ class ChangeRequestController extends Controller
 
     public function show(ChangeRequest $changeRequest): View
     {
-        $changeRequest->load(['client', 'project', 'timeline.developer', 'timeline.approver']);
+        $changeRequest->load(['client', 'project', 'timeline.developer', 'timeline.approver', 'attachments']);
 
         return view('admin.change-requests.show', compact('changeRequest'));
     }

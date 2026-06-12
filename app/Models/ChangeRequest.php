@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ChangeRequest extends Model
@@ -53,6 +54,11 @@ class ChangeRequest extends Model
     public function timeline(): HasOne
     {
         return $this->hasOne(ChangeRequestTimeline::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(ChangeRequestAttachment::class);
     }
 
     public function getStatusBadgeClassAttribute(): string

@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangeRequest\StoreChangeRequestRequest;
 use App\Http\Requests\ChangeRequest\UpdateChangeRequestRequest;
 use App\Models\ChangeRequest;
+use App\Services\ChangeRequestAttachmentService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ChangeRequestController extends Controller
 {
+    public function __construct(
+        private ChangeRequestAttachmentService $attachmentService,
+    ) {}
+
     public function index(Request $request): View
     {
         $changeRequests = ChangeRequest::query()
-            ->with(['client', 'timeline'])
+            ->with(['client', 'timeline', 'attachments'])
             ->where('client_id', $request->user()->id)
             ->latest()
             ->get();
@@ -29,13 +34,21 @@ class ChangeRequestController extends Controller
 
     public function store(StoreChangeRequestRequest $request): RedirectResponse
     {
-        ChangeRequest::create([
+        $changeRequest = ChangeRequest::create([
             'client_id' => $request->user()->id,
             'title' => $request->validated('title'),
             'description' => $request->validated('description'),
             'priority' => $request->validated('priority'),
             'status' => 'submitted',
         ]);
+
+        if ($request->hasFile('attachments')) {
+            $this->attachmentService->storeMany(
+                $changeRequest,
+                $request->file('attachments'),
+                $request->user()
+            );
+        }
 
         return redirect()
             ->route('change-requests.index')
@@ -46,7 +59,7 @@ class ChangeRequestController extends Controller
     {
         $this->authorizeClientAccess($request, $changeRequest);
 
-        $changeRequest->load(['client', 'timeline.developer', 'timeline.approver']);
+        $changeRequest->load(['client', 'timeline.developer', 'timeline.approver', 'attachments.uploader']);
 
         return view('change-requests.show', compact('changeRequest'));
     }
@@ -59,6 +72,8 @@ class ChangeRequestController extends Controller
             abort(403, 'Only submitted change requests can be edited.');
         }
 
+        $changeRequest->load('attachments');
+
         return view('change-requests.edit', compact('changeRequest'));
     }
 
@@ -70,7 +85,19 @@ class ChangeRequestController extends Controller
             abort(403, 'Only submitted change requests can be edited.');
         }
 
-        $changeRequest->update($request->validated());
+        $changeRequest->update($request->safe()->only(['title', 'description', 'priority']));
+
+        if ($request->filled('remove_attachments')) {
+            $this->attachmentService->deleteByIds($changeRequest, $request->input('remove_attachments'));
+        }
+
+        if ($request->hasFile('attachments')) {
+            $this->attachmentService->storeMany(
+                $changeRequest,
+                $request->file('attachments'),
+                $request->user()
+            );
+        }
 
         return redirect()
             ->route('change-requests.show', $changeRequest)
@@ -85,6 +112,7 @@ class ChangeRequestController extends Controller
             abort(403, 'Only submitted change requests can be deleted.');
         }
 
+        $this->attachmentService->deleteAll($changeRequest);
         $changeRequest->delete();
 
         return redirect()

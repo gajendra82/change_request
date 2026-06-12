@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('change-requests.store') }}" id="crWizardForm" data-draft-key="new">
+                <form method="POST" action="{{ route('change-requests.store') }}" id="crWizardForm" data-draft-key="new" enctype="multipart/form-data">
                     @csrf
 
                     <div class="wizard-panel active" data-step="1">
@@ -37,7 +37,7 @@
                             <label for="title">Request Title</label>
                             @error('title')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                         </div>
-                        <div class="form-floating-crms">
+                        <div class="form-floating-crms form-floating-crms--select">
                             <select id="priority" name="priority" required class="@error('priority') is-invalid @enderror">
                                 <option value="" disabled @selected(!old('priority'))>Select priority</option>
                                 @foreach(['low', 'medium', 'high', 'critical'] as $priority)
@@ -66,10 +66,16 @@
                             <i data-lucide="upload-cloud" class="drop-icon"></i>
                             <div class="fw-semibold">Drag & drop files here</div>
                             <div class="text-muted small">or click to browse</div>
-                            <input type="file" id="fileInput" multiple class="d-none" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+                            <input type="file" id="fileInput" name="attachments[]" multiple class="d-none"
+                                   accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.xls,.xlsx,.zip">
                         </div>
                         <div id="fileList"></div>
-                        <div class="text-muted small mt-2"><i data-lucide="info" style="width:14px;height:14px"></i> File upload is for preview only — backend storage coming soon.</div>
+                        @error('attachments')<div class="text-danger small mt-2">{{ $message }}</div>@enderror
+                        @error('attachments.*')<div class="text-danger small mt-2">{{ $message }}</div>@enderror
+                        <div class="text-muted small mt-2">
+                            <i data-lucide="info" style="width:14px;height:14px"></i>
+                            PDF, DOC, DOCX, PNG, JPG, XLS, XLSX, ZIP — max 10 MB per file, up to 10 files.
+                        </div>
                     </div>
 
                     <div class="wizard-panel" data-step="4">

@@ -38,6 +38,7 @@
                     </div>
                 </div>
             </div>
+            @include('partials.change-request-attachments', ['changeRequest' => $timeline->changeRequest])
         </div>
 
         <div class="col-lg-5">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\ChangeRequest;
 
+use App\Services\ChangeRequestAttachmentService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreChangeRequestRequest extends FormRequest
@@ -13,10 +14,10 @@ class StoreChangeRequestRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+        return array_merge([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'priority' => ['required', 'in:low,medium,high,critical'],
-        ];
+        ], ChangeRequestAttachmentService::validationRules());
     }
 }

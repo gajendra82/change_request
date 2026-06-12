@@ -675,6 +675,36 @@ body.sidebar-collapsed .crms-main {
     outline: none;
 }
 
+.form-floating-crms--select select,
+.form-floating-crms select {
+    padding: 22px 14px 8px;
+    min-height: 48px;
+    height: 48px;
+    line-height: 1.25;
+    appearance: auto;
+    -webkit-appearance: menulist;
+    cursor: pointer;
+}
+
+.form-floating-crms--select label,
+.form-floating-crms select + label {
+    top: 8px;
+    transform: none;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--crms-text-muted);
+    background: var(--crms-card);
+    padding: 0 4px;
+    z-index: 1;
+}
+
+.form-floating-crms--select select:focus + label,
+.form-floating-crms select:focus + label,
+.form-floating-crms--select select:valid + label,
+.form-floating-crms select:valid + label {
+    color: var(--crms-primary);
+}
+
 .form-floating-crms textarea {
     padding-top: 22px;
     min-height: 120px;
@@ -1148,18 +1178,62 @@ body.sidebar-collapsed .crms-main {
     margin: 0;
 }
 
-.auth-demo-box {
-    background: var(--crms-bg);
-    border: 1px solid var(--crms-border);
-    border-radius: var(--crms-radius-sm);
-    padding: 12px 14px;
-    font-size: 0.8125rem;
-    color: var(--crms-text-muted);
-    margin-bottom: 20px;
+/* Attachments */
+.attachment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.auth-demo-box strong {
-    color: var(--crms-text);
+.attachment-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--crms-border);
+    border-radius: var(--crms-radius-sm);
+    background: var(--crms-card);
+}
+
+.attachment-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--crms-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    word-break: break-word;
+}
+
+.attachment-link:hover {
+    text-decoration: underline;
+}
+
+.attachment-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--crms-border);
+}
+
+.attachment-thumb-link {
+    flex-shrink: 0;
+}
+
+.attachment-remove-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--crms-text-muted);
+    margin: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.attachment-remove-label input {
+    margin: 0;
 }
 
 /* ── Alerts ── */

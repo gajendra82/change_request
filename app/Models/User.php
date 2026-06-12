@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -107,7 +108,7 @@ class User extends Authenticatable
 
     public function getProfilePhotoUrlAttribute(): ?string
     {
-        return $this->profile_photo ? asset('storage/'.$this->profile_photo) : null;
+        return $this->profile_photo ? Storage::disk('public')->url($this->profile_photo) : null;
     }
 
     public function getInitialsAttribute(): string

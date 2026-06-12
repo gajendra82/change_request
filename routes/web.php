@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangeRequestAttachmentController;
 use App\Http\Controllers\ChangeRequestController;
 use App\Http\Controllers\ChangeRequestTimelineController;
 use App\Http\Controllers\DashboardController;
@@ -20,6 +21,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('role:client')->group(function () {
         Route::resource('change-requests', ChangeRequestController::class);
+        Route::delete('change-requests/{changeRequest}/attachments/{attachment}', [ChangeRequestAttachmentController::class, 'destroy'])
+            ->name('change-requests.attachments.destroy');
+    });
+
+    Route::middleware('role:client,developer,manager,admin')->group(function () {
+        Route::get('change-requests/{changeRequest}/attachments/{attachment}/download', [ChangeRequestAttachmentController::class, 'download'])
+            ->name('change-requests.attachments.download');
     });
 
     Route::middleware('role:developer')->prefix('developer')->name('timelines.')->group(function () {

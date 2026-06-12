@@ -31,7 +31,7 @@ class ChangeRequestTimelineController extends Controller
     public function create(ChangeRequest $changeRequest): View|RedirectResponse
     {
         $this->authorizePendingRequest($changeRequest);
-        $changeRequest->load('client');
+        $changeRequest->load(['client', 'attachments']);
 
         if ($changeRequest->timeline) {
             return redirect()

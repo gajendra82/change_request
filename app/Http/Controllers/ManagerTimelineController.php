@@ -28,7 +28,7 @@ class ManagerTimelineController extends Controller
 
     public function show(ChangeRequestTimeline $timeline): View
     {
-        $timeline->load(['changeRequest.client', 'developer', 'approver']);
+        $timeline->load(['changeRequest.client', 'changeRequest.attachments', 'developer', 'approver']);
 
         return view('manager.timelines.show', compact('timeline'));
     }
